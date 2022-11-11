@@ -18,7 +18,7 @@ public class AdminDaoImpl implements AdminDao{
 		String message = "Details not saved";
 		
 		try(Connection conn = DBUtil.provideConnection()){
-			PreparedStatement ps = conn.prepareStatement("insert into employee values(?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into employee values(?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, employee.getEmployeeID());
 			ps.setString(2, employee.getFirstName());
 			ps.setString(3, employee.getMiddleName());
@@ -30,6 +30,7 @@ public class AdminDaoImpl implements AdminDao{
 			ps.setString(9, employee.getEmail());
 			ps.setInt(10, employee.getDeptId());
 			ps.setString(11, employee.getpassword());
+			ps.setString(12, employee.getleaveApply());
 			
 		int x = ps.executeUpdate();
 		
@@ -150,10 +151,11 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public int getLeaveAppliedEmployee() {
+	public int getLeaveAppliedEmployee(String condition) {
 		int id = -1;
 		try (Connection conn = DBUtil.provideConnection()){
-			PreparedStatement ps = conn.prepareStatement("select id from employee where leaveApplied=Yes");
+			PreparedStatement ps = conn.prepareStatement("select employeeId from employee where leaveApplied=?");
+			ps.setString(1, condition);
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {

@@ -197,7 +197,12 @@ public class IntroToApp {
 		}
 		case 5:
 		{
-			int id = admin.getLeaveAppliedEmployee();
+			String in = "Yes";
+			int id = admin.getLeaveAppliedEmployee(in);
+			if(id==-1) {
+				System.out.println("No employee applied for leave");
+				break;
+			}
 			System.out.println("1. To accept leave\n2. To deny leave");
 			int val2 = sc.nextInt();
 			String condition = "Rejected";
@@ -275,6 +280,7 @@ public class IntroToApp {
 			}
 			String res = emp.applyLeave(id, condition);
 			System.out.println(res);
+			employeeUseCase(id);
 			break;
 		}
 			

@@ -18,7 +18,7 @@ public interface AdminDao{
 	
 	public List<Department> getAllDeprtments();
 	
-	public int getLeaveAppliedEmployee();
+	public int getLeaveAppliedEmployee(String condition);
 	
 	public String updateLeaveStatus(int id, String condition);
 
