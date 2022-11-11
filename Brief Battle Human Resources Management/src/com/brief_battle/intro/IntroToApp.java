@@ -19,7 +19,6 @@ import com.brief_battle.utility.DBUtil;
 public class IntroToApp {
 
 	public static void main(String[] args) {
-		boolean empFlag = false;
 		boolean adminFlag = false;
 		
 		Scanner sc = new Scanner(System.in);
@@ -59,7 +58,6 @@ public class IntroToApp {
 			String empEmail = sc.nextLine();
 			System.out.println("Enter password: ");
 			String empPass = sc.nextLine();
-//			sc.close();
 			int res = intro.employeeAccess(empEmail,empPass);
 			if(res >= 0) {
 				intro.employeeUseCase(res);
@@ -191,7 +189,6 @@ public class IntroToApp {
 			String departmentName = sc.nextLine();
 			System.out.println("Enter department location: ");
 			String location = sc.nextLine();
-//			sc.close();
 			Department dept = new Department(departmentId, departmentName, location);
 			String res = admin.addDepartment(dept);
 			System.out.println(res);
@@ -200,7 +197,21 @@ public class IntroToApp {
 		}
 		case 5:
 		{
-			
+			int id = admin.getLeaveAppliedEmployee();
+			System.out.println("1. To accept leave\n2. To deny leave");
+			int val2 = sc.nextInt();
+			String condition = "Rejected";
+			if(val2==1) {
+				condition = "Accepted";
+				String res = admin.updateLeaveStatus(id, condition);
+				System.out.println(res);
+			}else if(val2==2) {
+				String res = admin.updateLeaveStatus(id, condition);
+				System.out.println(res);
+			}else {
+				System.out.println("Wrong input");
+			}
+			adminUseCase();
 			break;
 		}
 
@@ -210,6 +221,7 @@ public class IntroToApp {
 			
 			break;
 		}
+		
 		
 		}
 		
@@ -272,7 +284,7 @@ public class IntroToApp {
 			break;
 		}
 		}
-		
+
 	}
 
 }

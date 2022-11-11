@@ -149,4 +149,40 @@ public class AdminDaoImpl implements AdminDao{
 		return deptList;
 	}
 
+	@Override
+	public int getLeaveAppliedEmployee() {
+		int id = -1;
+		try (Connection conn = DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select id from employee where leaveApplied=Yes");
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				id = rs.getInt("employeeId");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
+		return id;
+	}
+
+	@Override
+	public String updateLeaveStatus(int id, String condition) {
+		String message = "Leave status updation failed";
+		try (Connection conn = DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("update employee set leaveApplied=? where employeeId=?");
+			ps.setString(1, condition);
+			ps.setInt(2, id);
+			
+		int x = ps.executeUpdate();
+		if(x != 0) {
+			System.out.println("leave status updated successfully");
+		}
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+		return message;
+	}
+
 }
