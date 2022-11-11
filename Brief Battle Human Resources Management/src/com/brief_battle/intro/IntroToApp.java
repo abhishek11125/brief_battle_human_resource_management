@@ -1,5 +1,6 @@
 package com.brief_battle.intro;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,8 @@ import java.util.Scanner;
 
 import com.brief_battle.dao.AdminDao;
 import com.brief_battle.dao.AdminDaoImpl;
+import com.brief_battle.dao.EmployeeDao;
+import com.brief_battle.dao.EmployeeDaoImpl;
 import com.brief_battle.model.Department;
 import com.brief_battle.model.Employee;
 import com.brief_battle.utility.DBUtil;
@@ -56,9 +59,9 @@ public class IntroToApp {
 			String empEmail = sc.nextLine();
 			System.out.println("Enter password: ");
 			String empPass = sc.nextLine();
-			sc.close();
-			String res = intro.employeeAccess(empEmail,empPass);
-			if(res != null) {
+//			sc.close();
+			int res = intro.employeeAccess(empEmail,empPass);
+			if(res >= 0) {
 				intro.employeeUseCase(res);
 			}else {
 				System.out.println("Wrong Credentials");
@@ -75,8 +78,8 @@ public class IntroToApp {
 		
 	}
 	
-	public String employeeAccess(String empEmail, String empPass) {
-		String res = null;
+	public int employeeAccess(String empEmail, String empPass) {
+		int res = -1;
 		try(Connection conn  = DBUtil.provideConnection()){
 			PreparedStatement ps = conn.prepareStatement("select * from employee where email=? AND password=?");
 			ps.setString(1, empEmail);
@@ -85,7 +88,7 @@ public class IntroToApp {
 			ResultSet rs =  ps.executeQuery();
 			
 			if(rs.next()) {
-				 res  = rs.getString("firstName");
+				 res  = rs.getInt("employeeId");
 				return res;
 			}
 		}catch(SQLException e) {
@@ -99,7 +102,7 @@ public class IntroToApp {
 		AdminDao admin = new AdminDaoImpl();
 		System.out.println("Welcome to admin console");
 		int val = 0;
-		System.out.println("1. Register Employee\n2. Transfer Employee\n3. Update & View Department\n4. Add New Department\n5. Check Leave Requests\n0. Exit");
+		System.out.println("1. Register Employee\n2. Transfer Employee\n3. Update & View Department\n4. Add New Department\n5. Check Leave Requests\n0. Logout");
 		val = sc.nextInt();
 		
 		switch (val) {
@@ -186,6 +189,7 @@ public class IntroToApp {
 			String departmentName = sc.nextLine();
 			System.out.println("Enter department location: ");
 			String location = sc.nextLine();
+//			sc.close();
 			Department dept = new Department(departmentId, departmentName, location);
 			String res = admin.addDepartment(dept);
 			System.out.println(res);
@@ -200,15 +204,54 @@ public class IntroToApp {
 
 		default:
 		{
-			System.out.println("Thank You");
+			System.out.println("Thank You!");
 			
 			break;
 		}
+		
 		}
 		
 	}
-	public void employeeUseCase(String name) {
-		System.out.println("Welcome "+name);
+	public void employeeUseCase(int id) {
+		Scanner sc = new Scanner(System.in);
+		EmployeeDao emp = new EmployeeDaoImpl();
+		System.out.println("1. To change password\n2. To view and update profile\n3. To apply for leave\n0. Logout");
+		int val = sc.nextInt();
+		switch (val) {
+		case 1:
+		{
+			System.out.println("Enter new password: ");
+			String newPass = sc.next();
+			String res = emp.changePassword(id, newPass);
+			System.out.println(res);
+			break;
+		}
+		case 2:
+		{
+			System.out.println("1. To view profile\n2. To update address\n3. To update mobile number");
+			int val1 = sc.nextInt();
+			if(val1==1) {
+				
+			}else if(val1==2) {
+				
+			}else if(val1==3) {
+				
+			}
+			
+			break;
+		}
+		case 3:
+		{
+			
+			break;
+		}
+			
+		default:
+		{
+			System.out.println("Thank you!");
+			break;
+		}
+		}
 		
 	}
 
