@@ -11,12 +11,13 @@ public class Employee {
 	private String mobileNumber;
 	private String email;
 	private int deptId;
+	private String password;
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Employee(int employeeID, String firstName, String middleName, String lastName, String dateOfBirth,
-			String address, String gender, String mobileNumber, String email, int deptId) {
+			String address, String gender, String mobileNumber, String email, int deptId, String password) {
 		super();
 		this.employeeID = employeeID;
 		this.firstName = firstName;
@@ -28,6 +29,8 @@ public class Employee {
 		this.mobileNumber = mobileNumber;
 		this.email = email;
 		this.deptId = deptId;
+		this.password = password;
+		
 	}
 	public int getEmployeeID() {
 		return employeeID;
@@ -89,11 +92,17 @@ public class Employee {
 	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
+	public String getpassword() {
+		return password;
+	}
+	public void setDeptId(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
-		return "Employee [employeeID=" + employeeID + ", firstName=" + firstName + ", middleName=" + middleName
+		return "employeeID=" + employeeID + ", firstName=" + firstName + ", middleName=" + middleName
 				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", gender="
-				+ gender + ", mobileNumber=" + mobileNumber + ", email=" + email + ", deptId=" + deptId + "]";
+				+ gender + ", mobileNumber=" + mobileNumber + ", email=" + email + ", deptId=" + deptId + ", password=" + password + "\n";
 	}
 	
 
