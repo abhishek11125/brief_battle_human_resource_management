@@ -12,12 +12,13 @@ public class Employee {
 	private String email;
 	private int deptId;
 	private String password;
+	private String leaveApply;
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Employee(int employeeID, String firstName, String middleName, String lastName, String dateOfBirth,
-			String address, String gender, String mobileNumber, String email, int deptId, String password) {
+			String address, String gender, String mobileNumber, String email, int deptId, String password,String leaveApply) {
 		super();
 		this.employeeID = employeeID;
 		this.firstName = firstName;
@@ -30,7 +31,7 @@ public class Employee {
 		this.email = email;
 		this.deptId = deptId;
 		this.password = password;
-		
+		this.leaveApply = leaveApply;
 	}
 	public int getEmployeeID() {
 		return employeeID;
@@ -95,8 +96,14 @@ public class Employee {
 	public String getpassword() {
 		return password;
 	}
-	public void setDeptId(String password) {
+	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getleaveApply() {
+		return leaveApply;
+	}
+	public void setleaveApply(String leaveApply) {
+		this.leaveApply = leaveApply;
 	}
 	@Override
 	public String toString() {

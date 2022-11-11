@@ -133,8 +133,10 @@ public class IntroToApp {
 			sc.nextLine();
 			System.out.println("Enter password: ");
 			String password = sc.nextLine();
+			System.out.println("Enter leave condition: ");
+			String leave = sc.nextLine();
 			
-			Employee employee = new Employee(id, firstName, middleName, lastName, birthDate, address, gender, mobileNumber, email, deptId, password);
+			Employee employee = new Employee(id, firstName, middleName, lastName, birthDate, address, gender, mobileNumber, email, deptId, password,leave);
 			String res = admin.addEmployee(employee);
 			System.out.println(res);
 			adminUseCase();
@@ -224,6 +226,7 @@ public class IntroToApp {
 			String newPass = sc.next();
 			String res = emp.changePassword(id, newPass);
 			System.out.println(res);
+			employeeUseCase(id);
 			break;
 		}
 		case 2:
@@ -231,18 +234,35 @@ public class IntroToApp {
 			System.out.println("1. To view profile\n2. To update address\n3. To update mobile number");
 			int val1 = sc.nextInt();
 			if(val1==1) {
-				
-			}else if(val1==2) {
-				
-			}else if(val1==3) {
-				
+			Employee emp1 = emp.getDetails(id);
+			if(emp1 != null) {
+				System.out.println(emp1);
 			}
+			}else if(val1==2) {
+				System.out.println("Enter new address: ");
+				String newAddress = sc.next();
+				String res = emp.updateAddress(id, newAddress);
+				System.out.println(res);
+			}else if(val1==3) {
+				System.out.println("Enter new mobile number: ");
+				String newMobile = sc.next();
+				String res = emp.updateMobileNumber(id, newMobile);
+				System.out.println(res);
+			}
+			employeeUseCase(id);
 			
 			break;
 		}
 		case 3:
 		{
-			
+			String condition = "No";
+			System.out.println("Enter 1 to apply leave");
+			int x = sc.nextInt();
+			if(x == 1) {
+				 condition = "Yes";
+			}
+			String res = emp.applyLeave(id, condition);
+			System.out.println(res);
 			break;
 		}
 			
