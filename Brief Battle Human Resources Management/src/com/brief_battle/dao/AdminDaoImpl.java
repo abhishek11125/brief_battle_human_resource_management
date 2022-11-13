@@ -83,7 +83,7 @@ public class AdminDaoImpl implements AdminDao{
 				message = "Transferred Successfully";
 			}
 		}catch(SQLException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 		
 		return message;
@@ -122,7 +122,7 @@ public class AdminDaoImpl implements AdminDao{
 				message = "Department name updated successfully";
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 		
 		return message;

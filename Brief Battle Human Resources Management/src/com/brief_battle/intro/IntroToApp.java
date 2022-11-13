@@ -26,7 +26,7 @@ public class IntroToApp {
 		
 		System.out.println("Welcome to Brief Battle Human Resource Services");
 		
-		System.out.println("Enter 1 to login as Admin \n Enter 2 to login as Employee");
+		System.out.println("1. To login as Admin \n2. To login as Employee");
 		int val = sc.nextInt();
 		
 		String email = "admin121@gmail.com";
@@ -94,7 +94,7 @@ public class IntroToApp {
 		}
 		return res;
 	}
-	
+	//Admin Related functions
 	public void adminUseCase() {
 		Scanner sc = new Scanner(System.in);
 		AdminDao admin = new AdminDaoImpl();
@@ -172,7 +172,11 @@ public class IntroToApp {
 				System.out.println(res);
 			}else if(val1==3) {
 				List<Department> dept = admin.getAllDeprtments();
-				System.out.println(dept);
+				if(dept != null) {
+					System.out.println(dept);
+				}else {
+					System.out.println("No any department found");
+				}
 			}else {
 				System.out.println("Wrong input");
 			}
@@ -201,6 +205,7 @@ public class IntroToApp {
 			int id = admin.getLeaveAppliedEmployee(in);
 			if(id==-1) {
 				System.out.println("No employee applied for leave");
+				adminUseCase();
 				break;
 			}
 			System.out.println("1. To accept leave\n2. To deny leave");
@@ -223,14 +228,11 @@ public class IntroToApp {
 		default:
 		{
 			System.out.println("Thank You!");
-			
 			break;
 		}
-		
-		
 		}
-		
 	}
+	//Employee related functions
 	public void employeeUseCase(int id) {
 		Scanner sc = new Scanner(System.in);
 		EmployeeDao emp = new EmployeeDaoImpl();
