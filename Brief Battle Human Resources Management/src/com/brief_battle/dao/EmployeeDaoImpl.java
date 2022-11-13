@@ -49,7 +49,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			String email = rs.getString("email");
 			int deptId = rs.getInt("deptId");
 			String password = rs.getString("password");
-			String leaveApply = rs.getString("leaveApply");
+			String leaveApply = rs.getString("leaveApplied");
 			
 			emp = new Employee(id1, firstName, middleName, lastName, birthDate, address, gender, mobileno, email, deptId, password,leaveApply);
 			
@@ -58,7 +58,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return emp;
 	}
 
